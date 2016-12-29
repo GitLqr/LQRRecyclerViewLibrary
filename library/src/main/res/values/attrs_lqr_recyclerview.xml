@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="LQRRecyclerView">
+        <!--RecyclerView的类型-->
+        <attr name="rv_type" format="integer">
+            <enum name="grid" value="0"/>
+            <enum name="stagger" value="1"/>
+        </attr>
+
+        <!--RecyclerView的方向-->
+        <attr name="rv_orientation">
+            <enum name="vertical" value="0"/>
+            <enum name="horizontal" value="1"/>
+        </attr>
+
+        <!--网格或瀑布流的列数-->
+        <attr name="rv_column" format="integer"/>
+
+        <!--下划线高度/宽度-->
+        <attr name="rv_divider_size" format="dimension"/>
+        <!--下划线颜色-->
+        <attr name="rv_divider_color" format="color"/>
+        <!--下划线图片-->
+        <attr name="rv_divider_drawable" format="reference"/>
+    </declare-styleable>
+
+</resources>
