@@ -14,11 +14,9 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 
 /**
- * @创建者 CSDN_LQR
- * @描述 方便使用的RecyclerView（默认是竖起列表）
+ * 方便使用的RecyclerView（默认是竖起列表）
  * <p>
  * 不需要管理LayouManger，可以通过xml文件或setter方法设置
  */
@@ -135,8 +133,6 @@ public class LQRRecyclerView extends RecyclerView {
 
     /**
      * 平滑滚动到指定位置（注意：对瀑布流无效果）
-     *
-     * @param position
      */
     public void smoothMoveToPosition(int position) {
         if (type != TYPE_GRID) {
@@ -167,8 +163,6 @@ public class LQRRecyclerView extends RecyclerView {
 
     /**
      * 滚动到指定位置（注意：对瀑布流无效果）
-     *
-     * @param position
      */
     public void moveToPosition(int position) {
         if (type != TYPE_GRID) {
@@ -198,8 +192,7 @@ public class LQRRecyclerView extends RecyclerView {
     }
 
     /**
-     * @创建者 CSDN_LQR
-     * @描述 RecyclerView的滚动监听, 用于平滑滚动条目置顶
+     * RecyclerView的滚动监听, 用于平滑滚动条目置顶
      */
     class RecyclerViewListener extends RecyclerView.OnScrollListener {
         @Override
@@ -261,8 +254,7 @@ public class LQRRecyclerView extends RecyclerView {
     }
 
     /**
-     * @创建者 CSDN_LQR
-     * @描述 LQRRecyclerView的滚动事件拓展（原滚动事件被用于平滑滚动）
+     * LQRRecyclerView的滚动事件拓展（原滚动事件被用于平滑滚动）
      */
     public interface OnScrollListenerExtension {
         void onScrollStateChanged(RecyclerView recyclerView, int newState);
@@ -272,8 +264,7 @@ public class LQRRecyclerView extends RecyclerView {
     /*================== LQRRecyclerView的滚动事件拓展 end ==================*/
 
     /**
-     * @创建者 CSDN_LQR
-     * @描述 分割线
+     * 分割线
      * <p>
      * 当同时设置了颜色和图片时，以图片为主
      * 当不设置size时，分割线以图片的厚度为标准或不显示分割线（size默认为0）。
@@ -315,10 +306,6 @@ public class LQRRecyclerView extends RecyclerView {
 
         /**
          * 绘制item分割线
-         *
-         * @param c
-         * @param parent
-         * @param state
          */
         @Override
         public void onDraw(Canvas c, RecyclerView parent, State state) {
@@ -332,11 +319,6 @@ public class LQRRecyclerView extends RecyclerView {
 
         /**
          * 根据分割线的size设置item偏移量
-         *
-         * @param outRect
-         * @param view
-         * @param parent
-         * @param state
          */
         @Override
         public void getItemOffsets(Rect outRect, View view, RecyclerView parent, State state) {
