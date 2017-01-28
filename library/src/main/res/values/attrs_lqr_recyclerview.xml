@@ -23,6 +23,9 @@
         <attr name="rv_divider_color" format="color"/>
         <!--下划线图片-->
         <attr name="rv_divider_drawable" format="reference"/>
+
+        <!--是否开启默认动画-->
+        <attr name="rv_default_animator_open" format="boolean"/>
     </declare-styleable>
 
 </resources>

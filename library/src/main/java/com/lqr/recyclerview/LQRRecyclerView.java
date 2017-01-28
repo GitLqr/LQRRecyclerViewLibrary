@@ -7,9 +7,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -41,6 +41,9 @@ public class LQRRecyclerView extends RecyclerView {
     private int dividerColor = Color.BLACK;
     private Drawable dividerDrawable = null;
 
+    //动画
+    private boolean isDefaultAnimatorOpen = false;
+
     private boolean move = false;
     private int mIndex = 0;
 
@@ -52,7 +55,7 @@ public class LQRRecyclerView extends RecyclerView {
         super(context, null);
     }
 
-    public LQRRecyclerView(Context context, @Nullable AttributeSet attrs) {
+    public LQRRecyclerView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         mContext = context;
@@ -73,6 +76,8 @@ public class LQRRecyclerView extends RecyclerView {
                 dividerDrawable = typedArray.getDrawable(attr);
             } else if (attr == R.styleable.LQRRecyclerView_rv_divider_color) {
                 dividerColor = typedArray.getColor(attr, Color.BLACK);
+            } else if (attr == R.styleable.LQRRecyclerView_rv_default_animator_open) {
+                isDefaultAnimatorOpen = typedArray.getBoolean(attr, false);
             }
         }
         typedArray.recycle();
@@ -115,8 +120,18 @@ public class LQRRecyclerView extends RecyclerView {
         mItemDecoration = new LQRItemDecoration(mContext, orientation, dividerSize, dividerColor, dividerDrawable);
         this.addItemDecoration(mItemDecoration);
 
-        //3、设置滚动监听（用于平滑滚动）
+        //3、设置默认动画是否开启
+        if (!isDefaultAnimatorOpen) {
+            //关闭默认动画
+            closeItemAnimator();
+        } else {
+            //打开默认动画
+            openItemAnimator();
+        }
+
+        //4、设置滚动监听（用于平滑滚动）
         addOnScrollListener(new RecyclerViewListener());
+
     }
 
     /**
@@ -426,6 +441,34 @@ public class LQRRecyclerView extends RecyclerView {
 
     public void setDividerDrawable(Drawable dividerDrawable) {
         this.dividerDrawable = dividerDrawable;
+    }
+
+    public boolean isDefaultAnimatorOpen() {
+        return isDefaultAnimatorOpen;
+    }
+
+    /**
+     * 打开局部刷新动画
+     */
+    public void openItemAnimator() {
+        isDefaultAnimatorOpen = true;
+        this.getItemAnimator().setAddDuration(120);
+        this.getItemAnimator().setChangeDuration(250);
+        this.getItemAnimator().setMoveDuration(250);
+        this.getItemAnimator().setRemoveDuration(120);
+        ((SimpleItemAnimator) this.getItemAnimator()).setSupportsChangeAnimations(true);
+    }
+
+    /**
+     * 关闭局部刷新动画
+     */
+    public void closeItemAnimator() {
+        isDefaultAnimatorOpen = false;
+        this.getItemAnimator().setAddDuration(0);
+        this.getItemAnimator().setChangeDuration(0);
+        this.getItemAnimator().setMoveDuration(0);
+        this.getItemAnimator().setRemoveDuration(0);
+        ((SimpleItemAnimator) this.getItemAnimator()).setSupportsChangeAnimations(false);
     }
 
     @Override

@@ -15,6 +15,7 @@
         app:rv_divider_color="#f00"
         app:rv_divider_size="10dp"
         app:rv_orientation="vertical"
+        app:rv_default_animator_open="true"
         app:rv_type="grid"/>
 
 </RelativeLayout>
